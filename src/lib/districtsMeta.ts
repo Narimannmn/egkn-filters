@@ -59,9 +59,11 @@ export async function fetchRegions(): Promise<Region[]> {
   return raw.map((r) => ({
     code: r.code,
     nameRu: r.nameRu,
-    districts: (r.districts ?? [])
-      .filter((d) => d.type && d.type.startsWith("р-н"))
-      .map((d) => ({ code: d.code, nameRu: d.nameRu, type: d.type })),
+    districts: (r.districts ?? []).map((d) => ({
+      code: d.code,
+      nameRu: d.nameRu,
+      type: d.type,
+    })),
   }));
 }
 

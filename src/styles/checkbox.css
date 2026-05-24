@@ -1,0 +1,69 @@
+.egkn-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 6px 4px;
+  border-radius: 6px;
+}
+
+.egkn-checkbox-row:hover {
+  background: #222;
+}
+
+.egkn-checkbox {
+  all: unset;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #1a1a1a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.egkn-checkbox[data-state="checked"] {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.egkn-checkbox-indicator {
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.egkn-sublayer-row {
+  padding: 6px 6px;
+}
+
+.egkn-sublayer-row.is-empty {
+  opacity: 0.45;
+}
+
+.egkn-sublayer-title {
+  font-size: 14px;
+  color: #ddd;
+  line-height: 1.35;
+  flex: 1;
+}
+
+.egkn-sublayer-count {
+  margin-left: auto;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: #888;
+  background: #232323;
+  border: 1px solid #2f2f2f;
+  border-radius: 999px;
+  padding: 1px 8px;
+  min-width: 28px;
+  text-align: center;
+}
+
+.egkn-sublayer-row.is-empty .egkn-sublayer-count {
+  color: #555;
+  background: transparent;
+}

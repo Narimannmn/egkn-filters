@@ -1,0 +1,147 @@
+.egkn-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 2147483646;
+  animation: egkn-fade 0.18s ease;
+}
+
+.egkn-dialog-content {
+  position: fixed;
+  inset: 5vh 5vw;
+  width: 90vw;
+  height: 90vh;
+  background: #161616;
+  border: 1px solid #2a2a2a;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2147483647;
+  animation: egkn-slide 0.18s ease;
+}
+
+@keyframes egkn-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes egkn-slide {
+  from { opacity: 0; transform: translateY(12px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.egkn-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid #262626;
+  background: #131313;
+  flex-shrink: 0;
+}
+
+.egkn-dialog-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.egkn-dialog-close {
+  background: transparent;
+  border: none;
+  color: #999;
+  font-size: 26px;
+  line-height: 1;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.egkn-dialog-close:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.egkn-dialog-body {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.egkn-sidebar {
+  border-right: 1px solid #262626;
+  padding: 18px 18px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #161616;
+}
+
+.egkn-main {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.egkn-main-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid #262626;
+  background: #181818;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.egkn-main-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px 20px 24px;
+  scrollbar-gutter: stable;
+}
+
+.egkn-main-footer {
+  flex-shrink: 0;
+  border-top: 1px solid #262626;
+  background: #181818;
+  padding: 10px 20px;
+}
+
+.egkn-main-footer:empty {
+  display: none;
+}
+
+/* Wider, more obvious scrollbars for touchpad/mouse */
+.egkn-main-scroll::-webkit-scrollbar,
+.egkn-sidebar::-webkit-scrollbar,
+.egkn-multiselect-list::-webkit-scrollbar {
+  width: 12px;
+}
+.egkn-main-scroll::-webkit-scrollbar-thumb,
+.egkn-sidebar::-webkit-scrollbar-thumb,
+.egkn-multiselect-list::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 6px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+.egkn-main-scroll::-webkit-scrollbar-thumb:hover,
+.egkn-sidebar::-webkit-scrollbar-thumb:hover,
+.egkn-multiselect-list::-webkit-scrollbar-thumb:hover {
+  background: #444;
+  background-clip: padding-box;
+  border: 3px solid transparent;
+}
+.egkn-main-scroll::-webkit-scrollbar-track,
+.egkn-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}

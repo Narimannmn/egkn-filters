@@ -1,0 +1,27 @@
+.egkn-fab {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  z-index: 2147483647;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.egkn-fab:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+.egkn-fab:active {
+  transform: scale(0.95);
+}

@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "ЕГКН Фильтр",
+  "version": "0.1.0",
+  "description": "Standalone-фильтр участков на map.gov4c.kz/egkn/",
+  "content_scripts": [
+    {
+      "matches": ["https://map.gov4c.kz/egkn/*"],
+      "js": ["src/content/index.tsx"],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": []
+}

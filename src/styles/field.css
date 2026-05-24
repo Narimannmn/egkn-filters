@@ -1,0 +1,77 @@
+.egkn-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.egkn-field-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #888;
+  font-weight: 600;
+}
+
+.egkn-select {
+  background: #222;
+  color: #e6e6e6;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.egkn-select:hover {
+  border-color: #444;
+}
+
+.egkn-link-btn {
+  background: transparent;
+  border: none;
+  color: #6ea8ff;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 6px;
+  text-decoration: underline;
+  border-radius: 4px;
+}
+
+.egkn-link-btn:hover {
+  color: #93bdff;
+}
+
+.egkn-link-btn:disabled {
+  color: #555;
+  cursor: default;
+  text-decoration: none;
+}
+
+.egkn-link-btn-danger {
+  color: #f87171;
+}
+
+.egkn-link-btn-danger:hover {
+  color: #fca5a5;
+}
+
+.egkn-muted {
+  color: #777;
+  font-size: 13px;
+}
+
+.egkn-empty {
+  color: #888;
+  font-size: 15px;
+  padding: 32px 16px;
+  text-align: center;
+}
+
+.egkn-error {
+  color: #f87171;
+  font-size: 14px;
+  padding: 10px 12px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+}

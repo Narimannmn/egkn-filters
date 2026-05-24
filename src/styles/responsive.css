@@ -1,0 +1,11 @@
+@media (max-width: 760px) {
+  .egkn-dialog-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .egkn-sidebar {
+    border-right: none;
+    border-bottom: 1px solid #262626;
+    max-height: 40vh;
+  }
+}

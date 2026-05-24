@@ -13,6 +13,7 @@ export interface Badge {
 
 export interface LayerAdapter {
   getStatus(item: EgknItem): string | null;
+  getRight(item: EgknItem): string | null;
   getAddress(item: EgknItem): string | null;
   getRows(item: EgknItem): FieldRow[];
   getBadges(item: EgknItem): Badge[];
@@ -51,6 +52,7 @@ function joinNonEmpty(parts: Array<string | null>, sep: string): string | null {
 
 const reqlandAdapter: LayerAdapter = {
   getStatus: (item) => str(item.properties.land_status_name_ru),
+  getRight: (item) => str(item.properties.right_type_name_ru),
   getAddress: (item) => {
     const p = item.properties;
     return joinNonEmpty([str(p.address_ru), str(p.placedesc_ru)], ", ");
@@ -79,6 +81,7 @@ const reqlandAdapter: LayerAdapter = {
 
 const freeAdapter: LayerAdapter = {
   getStatus: (item) => str(item.properties.land_status_name_ru),
+  getRight: (item) => str(item.properties.pvp_name_ru),
   getAddress: (item) => str(item.properties.address_rus),
   getRows: (item) => {
     const p = item.properties as EgknProperty & Record<string, unknown>;

@@ -1,41 +1,49 @@
 import * as Checkbox from "@radix-ui/react-checkbox";
 import * as Popover from "@radix-ui/react-popover";
 import { usePortalContainer } from "../lib/portalContainer";
-import type { Sublayer } from "../lib/layersMeta";
 
-const NULL_CODE = "__null";
+export interface ValueOption {
+  value: string;
+  title: string;
+}
 
-interface SublayerMultiSelectProps {
-  sublayers: Sublayer[];
-  selectedCodes: Set<string>;
-  onToggleCode: (code: string) => void;
+interface ValueMultiSelectProps {
+  label: string;
+  options: ValueOption[];
+  selected: Set<string>;
+  onToggle: (value: string) => void;
   onClear: () => void;
   onSelectAll: () => void;
   counts: Map<string, number>;
+  nullValue?: string;
+  nullLabel?: string;
 }
 
-export function SublayerMultiSelect({
-  sublayers,
-  selectedCodes,
-  onToggleCode,
+export function ValueMultiSelect({
+  label,
+  options,
+  selected,
+  onToggle,
   onClear,
   onSelectAll,
   counts,
-}: SublayerMultiSelectProps) {
+  nullValue,
+  nullLabel,
+}: ValueMultiSelectProps) {
   const container = usePortalContainer();
-  const total = sublayers.length + 1;
-  const label =
-    selectedCodes.size === 0
+  const total = options.length + (nullValue ? 1 : 0);
+  const triggerLabel =
+    selected.size === 0
       ? `все (${total})`
-      : `выбрано: ${selectedCodes.size} из ${total}`;
+      : `выбрано: ${selected.size} из ${total}`;
 
   return (
     <div className="egkn-field">
-      <span className="egkn-field-label">Статусы</span>
+      <span className="egkn-field-label">{label}</span>
       <Popover.Root>
         <Popover.Trigger asChild>
           <button type="button" className="egkn-multiselect-trigger">
-            <span>{label}</span>
+            <span>{triggerLabel}</span>
             <span className="egkn-multiselect-caret">▾</span>
           </button>
         </Popover.Trigger>
@@ -58,30 +66,30 @@ export function SublayerMultiSelect({
                 type="button"
                 className="egkn-link-btn egkn-link-btn-danger"
                 onClick={onClear}
-                disabled={selectedCodes.size === 0}
+                disabled={selected.size === 0}
               >
                 сбросить
               </button>
             </div>
             <ul className="egkn-multiselect-list">
-              {sublayers.map((s) => (
-                <SublayerOption
-                  key={s.code}
-                  code={s.code}
-                  title={s.title}
-                  count={counts.get(s.code) ?? 0}
-                  checked={selectedCodes.has(s.code)}
-                  onToggle={() => onToggleCode(s.code)}
+              {options.map((o) => (
+                <ValueOptionRow
+                  key={o.value}
+                  title={o.title}
+                  count={counts.get(o.value) ?? 0}
+                  checked={selected.has(o.value)}
+                  onToggle={() => onToggle(o.value)}
                 />
               ))}
-              <SublayerOption
-                code={NULL_CODE}
-                title="Без статуса"
-                count={counts.get(NULL_CODE) ?? 0}
-                checked={selectedCodes.has(NULL_CODE)}
-                onToggle={() => onToggleCode(NULL_CODE)}
-                muted
-              />
+              {nullValue ? (
+                <ValueOptionRow
+                  title={nullLabel ?? "Без значения"}
+                  count={counts.get(nullValue) ?? 0}
+                  checked={selected.has(nullValue)}
+                  onToggle={() => onToggle(nullValue)}
+                  muted
+                />
+              ) : null}
             </ul>
           </Popover.Content>
         </Popover.Portal>
@@ -90,8 +98,7 @@ export function SublayerMultiSelect({
   );
 }
 
-interface OptionProps {
-  code: string;
+interface RowProps {
   title: string;
   count: number;
   checked: boolean;
@@ -99,13 +106,7 @@ interface OptionProps {
   muted?: boolean;
 }
 
-function SublayerOption({
-  title,
-  count,
-  checked,
-  onToggle,
-  muted,
-}: OptionProps) {
+function ValueOptionRow({ title, count, checked, onToggle, muted }: RowProps) {
   const isEmpty = count === 0;
   return (
     <li>

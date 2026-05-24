@@ -1,5 +1,6 @@
 import type { LayerGroup } from "../lib/layersMeta";
-import { SublayerMultiSelect } from "./SublayerMultiSelect";
+import { NULL_STATUS_CODE } from "../lib/sublayerFilter";
+import { ValueMultiSelect } from "./ValueMultiSelect";
 
 interface LayerTreeProps {
   groups: LayerGroup[];
@@ -67,13 +68,16 @@ export function LayerTree({
       ) : null}
 
       {layer && layer.sublayers.length > 0 ? (
-        <SublayerMultiSelect
-          sublayers={layer.sublayers}
-          selectedCodes={sublayerCodes}
-          onToggleCode={onToggleSublayer}
+        <ValueMultiSelect
+          label="Статусы"
+          options={layer.sublayers.map((s) => ({ value: s.code, title: s.title }))}
+          selected={sublayerCodes}
+          onToggle={onToggleSublayer}
           onClear={onClearSublayers}
           onSelectAll={onSelectAllSublayers}
           counts={statusCounts}
+          nullValue={NULL_STATUS_CODE}
+          nullLabel="Без статуса"
         />
       ) : null}
     </div>

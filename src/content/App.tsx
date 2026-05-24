@@ -1,9 +1,10 @@
-import { Suspense, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { ErrorBoundary } from "../components/ErrorBoundary";
 import { Fab } from "../components/Fab";
 import { FilterDialog } from "../components/FilterDialog";
 import { LayerTree } from "../components/LayerTree";
 import { LoadStatus } from "../components/LoadStatus";
+import { PropertyFiltersPanel } from "../components/PropertyFiltersPanel";
 import { RegionDistrictSelect } from "../components/RegionDistrictSelect";
 import { Pagination, ResultsList, useResultsPage } from "../components/ResultsList";
 import { useActiveDistrict } from "../hooks/useActiveDistrict";
@@ -11,11 +12,13 @@ import { useDistrictSelection } from "../hooks/useDistrictSelection";
 import { useLayerPages } from "../hooks/useLayerPages";
 import { useLayerSelection } from "../hooks/useLayerSelection";
 import { useLayersMeta } from "../hooks/useLayersMeta";
+import { usePropertyFilters } from "../hooks/usePropertyFilters";
 import { useRegions } from "../hooks/useRegions";
 import { useStatusCounts } from "../hooks/useStatusCounts";
 import { useSublayerFilter } from "../hooks/useSublayerFilter";
 import { getLayerAdapter } from "../lib/layerAdapter";
 import { findLayerMeta } from "../lib/layersMeta";
+import { filterByProperties } from "../lib/propertyFilter";
 import { queryClient } from "../lib/queryClient";
 import type { EgknItem } from "../types/api";
 
@@ -66,11 +69,16 @@ function DialogBody() {
   const pages = useLayerPages(activeLayer);
   const layerMeta = activeLayer ? findLayerMeta(meta, activeLayer) : null;
   const adapter = getLayerAdapter(activeLayer);
-  const filteredItems = useSublayerFilter(
+  const sublayerFiltered = useSublayerFilter(
     pages.items,
     layerSel.sublayerCodes,
     layerMeta,
     adapter,
+  );
+  const propertyFilters = usePropertyFilters(activeLayer);
+  const filteredItems = useMemo(
+    () => filterByProperties(sublayerFiltered, propertyFilters.filters, adapter),
+    [sublayerFiltered, propertyFilters.filters, adapter],
   );
   const statusCounts = useStatusCounts(pages.items, layerMeta, adapter);
 
@@ -105,6 +113,13 @@ function DialogBody() {
           onSelectAllSublayers={layerSel.selectAllSublayers}
           statusCounts={statusCounts}
         />
+        {activeLayer ? (
+          <PropertyFiltersPanel
+            items={pages.items}
+            adapter={adapter}
+            api={propertyFilters}
+          />
+        ) : null}
         {pages.error ? (
           <div className="egkn-error">Ошибка: {pages.error}</div>
         ) : null}

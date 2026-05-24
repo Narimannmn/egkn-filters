@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Chrome extension that adds filters to the EGKN (goszem.kz) requested-land-plots list",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",

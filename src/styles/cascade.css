@@ -10,15 +10,35 @@
 .egkn-cascade {
   display: grid;
   grid-template-columns: 320px 360px;
-  max-height: 60vh;
+  height: min(85vh, 640px);
 }
 
 .egkn-cascade-col {
   list-style: none;
   margin: 0;
   padding: 6px;
+  height: 100%;
   overflow-y: auto;
   overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #444 transparent;
+}
+
+.egkn-cascade-col::-webkit-scrollbar {
+  width: 8px;
+}
+
+.egkn-cascade-col::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+.egkn-cascade-col::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.egkn-cascade-col::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .egkn-cascade-regions {
